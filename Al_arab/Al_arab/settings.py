@@ -55,7 +55,7 @@ ROOT_URLCONF = 'Al_arab.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR/'login_app' /'templates'/'login_app'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -125,4 +125,4 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'luciluke23@gmail.com'
-EMAIL_HOST_PASSWORD = 'hellomoto'
+EMAIL_HOST_PASSWORD = 'sansLuci23'

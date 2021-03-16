@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Verification{% endblock %}
+
+{% block body %}
+
+<h1>Verify you mobile number!</h1>
+<p>
+<h3>Hi, we sent you a code on your given mobile number. Please enter the number in the below box.</h3>
+<form method="post">
+{% csrf_token %}
+    <p>
+        <h4>{{ form.label_tag }}:</h4>
+        {% for field in form %}
+            {{ field }}
+        {% endfor %}
+    </p>
+
+    <button type="submit">Submit</button>
+</form>
+</p>
+
+{% endblock %}

@@ -25,12 +25,18 @@ class UserRegister(models.Model):
         )
     password = models.CharField(
         _("Password"), 
-        help_text="<ul class='errorlist text-muted'><li>Your password can 't be too similar to your other personal information.</li><li>Your password must contain at least 8 characters.</li><li>Your password can 't be a commonly used password.</li> <li>Your password can 't be entirely numeric.<li></ul>"
+        max_length=25,
+        help_text="<ul> \
+            <li>Your password can 't be too similar to your other personal information.</li> \
+            <li>Your password must contain at least 8 characters.</li> \
+            <li>Your password can 't be a commonly used password.</li> \
+            <li>Your password can 't be entirely numeric.</li> \
+            </ul>"
         )
     
     class Meta:
-        verbose_name = "UserRegister"
-        verbose_name_plural = "UserRegisters"
+        verbose_name = "User"
+        verbose_name_plural = "Users"
     
     def __str__(self):
         """Convert object into string
