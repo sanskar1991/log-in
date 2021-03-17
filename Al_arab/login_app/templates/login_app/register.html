@@ -2,28 +2,74 @@
 
 {% block title %} Register {% endblock %}
 
+
+
+{% block navbar %}
+
+{% load static %}
+
+<a class="navbar-brand" href="{% url 'home' %}">
+    <img src="{% static 'media/logo.jpg' %}" width="35" height="35" class="d-inline-block align-top" alt="Ace Industries">
+    <b>Ace</b>
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'home' %}"> Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Link</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Dropdown
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#">Disabled</a>
+      </li>
+    </ul>
+{% endblock %}
+
+
+
 {% block body %}
 
 <h1>Hello User, please register here!</h1>
 
-
-<h2>Register</h2>
+<h2 class="text-center">Register</h2><br><br>
+  <div>
   <form method="post" action="">
     {% csrf_token %}
+    <div>
     {% for field in form %}
-      <p>
-        {{ field.label_tag }}<br>
+      <div class="form-group">
+        <label for="exampleInputEmail1">{{ field.label_tag }}</label>
+
         {{ field }}
+
+        
         {% if field.help_text %}
-          <small style="color: grey">{{ field.help_text|safe }}</small>
+          <small class="form-text text-muted" style="color: grey">{{ field.help_text|safe }}</small>
         {% endif %}
         {% for error in field.errors %}
           <p style="color: red">{{ error }}</p>
         {% endfor %}
-      </p>
+      </div>
     {% endfor %}
     <button type="submit">Register</button>
   </form>
+  </div>
 
 
 {% endblock %}

@@ -3,15 +3,10 @@ from django.http import HttpResponse
 from django.core.mail import send_mail
 from django.conf import settings
 import random
-import smtplib
 
 from .forms import SignupForm, OTPVerifyForm
 from .models import UserRegister
 
-
-# Create your views here.
-gmail_user = 'user3@gmail.com'
-gmail_password = 'password'
 
 def gen_otp():
     otp_num = random.randint(1000,9999)
@@ -21,7 +16,7 @@ sent_otp = gen_otp()
 print("1111111---Sent OTP : ", sent_otp)
 
 def home(request):
-    return HttpResponse('<h1>Home Page</h1>')
+    return render(request, 'home.html')
 
 def register(request):
     if request.method == 'POST':
@@ -78,34 +73,15 @@ def verify_email(request):
 
 
 def email(sent_otp):
-    
-    sent_from = gmail_user
-    to = ['user1@gmail.com','user2@gmail.com']
+    """
+    Sends email to the given recipients
+    """
     subject = 'Demo Mail'
-    message = f"""Hi Pratiksha,\n \
-    This email is to inform you that the email verification you wanted for the login page is working now. This is a demo mail to test the email verification functionality.\n \
-    Your code is {sent_otp}. \n \
-    Please send this code to me.\n\n \
-    Thanks and Regards\n \
-    Hello World"""
-    # email_from = settings.EMAIL_HOST_USER
-    # recipient_list = 
-    # send_mail( subject, message, email_from, recipient_list )
-
+    message = f"This is a demo mail. Your code is {sent_otp}"
+    email_from = settings.EMAIL_HOST_USER
+    recipient_list = ['user1@gmail.com','user2@gmail.com']
+    print("bcbcbc")
     try:
-        print("aaaa")
-        server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
-        print("bbbb")
-        server.ehlo()
-        print("cccc")
-        server.login(gmail_user, gmail_password)
-        print("dddd")
-        server.sendmail()
-        print("eeee")
-        server.close()
-        print("ffff")
-
-        print('Email sent!')
+        send_mail( subject, message, email_from, recipient_list )
     except:
-        server.login(gmail_user, gmail_password)
-        print('Something went wrong...')
+        print("Something went wrong.")
