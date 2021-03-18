@@ -27,6 +27,8 @@ def register(request):
             print("444")
             form.save(commit=False)
             print("555")
+            email(sent_otp)
+            print("121")
             return redirect('verify')
             if (verify_email(request, sent_otp)):
                 print("121212")
@@ -42,7 +44,7 @@ def register(request):
 
 
 
-def verify_email(request):
+def verify_email(request, sent_otp):
     
     if request.method == 'POST':
         print("888")
@@ -57,6 +59,7 @@ def verify_email(request):
                 if int(otp_field) == sent_otp:
                     print("011,011,011")
                     return redirect('home')
+                    
                 print("012,012,012")
                 return HttpResponse("<h3>Invalid OTP HERE!</h3>")
             except:
@@ -64,7 +67,7 @@ def verify_email(request):
             print("11,11,11")
     else:
         print("666")
-        email(sent_otp)
+        # email(sent_otp)
         form = OTPVerifyForm()
         print("777")
     return render(request, 'verification.html', {'form':form})
@@ -79,9 +82,12 @@ def email(sent_otp):
     subject = 'Demo Mail'
     message = f"This is a demo mail. Your code is {sent_otp}"
     email_from = settings.EMAIL_HOST_USER
-    recipient_list = ['user1@gmail.com','user2@gmail.com']
+    recipient_list = ['user1@gmail.com',]
     print("bcbcbc")
     try:
         send_mail( subject, message, email_from, recipient_list )
+        print("Email sent successfully!")
+        return redirect('verify')
+        print("131")
     except:
         print("Something went wrong.")
